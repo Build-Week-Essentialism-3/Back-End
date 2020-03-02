@@ -12,6 +12,8 @@ Base URL: **To be added when live** localhost:5500/api
 
 [Prompt(s)](#prompt(s))
 
+[Projects](#projects)
+
 ## Authentication
 
 ---
@@ -81,10 +83,19 @@ _Header must include token_
 
 ---
 
+### Initial username & password:
+
+```javascript
+{
+    "username": "testing",
+    "password": "123456"
+}
+```
+
 ### Get user's login information:
 
 ```diff
-+ **GET**   /:id/user
++ **GET**   /users/:id/user
 ```
 
 Response:
@@ -100,7 +111,7 @@ Response:
 ### Get user's profile information:
 
 ```diff
-+ **GET**   /:id/user-info
++ **GET**   /users/:id/user-info
 ```
 
 Response:
@@ -116,7 +127,7 @@ Response:
 ### Add user's profile information:
 
 ```diff
-+ **POST**  /:id/user-info
++ **POST**  /users/:id/user-info
 ```
 
 Request Body:
@@ -142,7 +153,7 @@ Response:
 ### Update user's login information:
 
 ```diff
-+ **PUT**   /:id/user
++ **PUT**   /users/:id/user
 ```
 
 Request Body:
@@ -168,7 +179,7 @@ Response:
 ### Update user's profile information:
 
 ```diff
-+ **PUT**   /:id/user-info
++ **PUT**   /users/:id/user-info
 ```
 
 Request Body:
@@ -194,7 +205,7 @@ Response:
 ### Delete user's credentials:
 
 ```diff
-+ **DELETE**    /:id
++ **DELETE**    /users/:id
 ```
 
 Response:
@@ -207,111 +218,121 @@ Response:
 }
 ```
 
-### Get user's chosen values
+### Get user's chosen values:
 
 ```diff
-+ **GET**   /:id/values
++ **GET**   /users/:id/values
 ```
 
 Response:
 
 ```javascript
-{
-    "id": user_value_id,
-    "user_id": user_id,
-    "value_id": value_id,
-    "name": "Value Name"
-},
-{
-    "id": user_value_id,
-    "user_id": user_id,
-    "value_id": value_id,
-    "name": "Value Name"
-},
-...
+[
+    {
+        "id": user_value_id,
+        "user_id": user_id,
+        "value_id": value_id,
+        "name": "Value Name"
+    },
+    {
+        "id": user_value_id,
+        "user_id": user_id,
+        "value_id": value_id,
+        "name": "Value Name"
+    },
+    ...
+]
 ```
 
-### Get one of user's chosen values
+### Get one of user's chosen values:
 
 ```diff
-+ **GET**   /:id/values/:user_value_id
++ **GET**   /users/:id/values/:user_value_id
 ```
 
 Response:
 
 ```javascript
-{
-    "id": user_value_id,
-    "user_id": user_id,
-    "value_id": value_id,
-    "name": "Value Name"
-}
+[
+    {
+        "id": user_value_id,
+        "user_id": user_id,
+        "value_id": value_id,
+        "name": "Value Name"
+    }
+]
 ```
 
-### Get user's top values
+### Get user's top values:
 
 ```diff
-+ **GET**   /:id/top-values
++ **GET**   /users/:id/top-values
 ```
 
 Response:
 
 ```javascript
-{
-    "id": user_value_id,
-    "user_id": user_id,
-    "value_id": value_id,
-    "priority": priority #,
-    "name": "Value Name"
-},
-{
-    "id": user_value_id,
-    "user_id": user_id,
-    "value_id": value_id,
-    "priority": priority #,
-    "name": "Value Name"
-},
-...
+[
+    {
+        "id": user_value_id,
+        "user_id": user_id,
+        "value_id": value_id,
+        "priority": priority #,
+        "name": "Value Name"
+    },
+    {
+        "id": user_value_id,
+        "user_id": user_id,
+        "value_id": value_id,
+        "priority": priority #,
+        "name": "Value Name"
+    },
+    ...
+]
 ```
 
-### Get user's prompt(s)
+### Get user's prompt(s):
 
 ```diff
-+ **GET**   /:id/prompt
++ **GET**   /users/:id/prompt
 ```
 
 Response:
 
 ```javascript
-{
-    "id": prompt_id,
-    "user_id": user_id,
-    "description": "Prompt Text"
-}
+[
+    {
+        "id": prompt_id,
+        "user_id": user_id,
+        "description": "Prompt Text"
+    }
+]
 ```
 
-### Get user's projects
+### Get user's projects:
 
 ```diff
-+ **GET**   /:id/projects
++ **GET**   /users/:id/projects
 ```
 
 Response:
 
 ```javascript
-{
-    "id": project_id,
-    "user_id": user_id,
-    "project": "Project Name",
-    "description": "Project Description"
-},
-{
-    "id": project_id,
-    "user_id": user_id,
-    "project": "Project Name",
-    "description": "Project Description"
-},
-...
+[
+    {
+        "id": project_id,
+        "user_id": user_id,
+        "project": "Project Name",
+        "description": "Project Description"
+    },
+    {
+        "id": project_id,
+        "user_id": user_id,
+        "project": "Project Name",
+        "description": "Project Description"
+    },
+    ...
+]
 ```
 
 ---
@@ -323,30 +344,32 @@ _Header must include token_
 
 ---
 
-### Get add values:
+### Get all values:
 
 ```diff
-+ **GET**   /
++ **GET**   /values/
 ```
 
 Response:
 
 ```javascript
-{
-    "id": id1,
-    "name": "Value name 1"
-},
-{
-    "id": id2,
-    "name": "Value name 2"
-},
-...
+[
+    {
+        "id": id1,
+        "name": "Value name 1"
+    },
+    {
+        "id": id2,
+        "name": "Value name 2"
+    },
+    ...
+]
 ```
 
 ### Get a value by value id:
 
 ```diff
-+ **GET**   /:id
++ **GET**   /values/:id
 ```
 
 ```javascript
@@ -359,7 +382,7 @@ Response:
 ### Add a new value:
 
 ```diff
-+ **POST**  /
++ **POST**  /values/
 ```
 
 Request Body:
@@ -382,7 +405,7 @@ Response:
 ### Add a user value:
 
 ```diff
-+ **POST**  /user/:user_id
++ **POST**  /values/user/:user_id
 ```
 
 Request Body:
@@ -403,10 +426,10 @@ Response:
 }
 ```
 
-### Add a user top value:
+### Add a user top value (max: 3):
 
 ```diff
-+ **POST**  /user/:user_id/top-values
++ **POST**  /values/user/:user_id/top-values
 ```
 
 Request Body:
@@ -431,7 +454,7 @@ Response:
 ### Update a value (user added only):
 
 ```diff
-+ **PUT**   /:id
++ **PUT**   /values/:id
 ```
 
 Request Body:
@@ -455,7 +478,7 @@ Response:
 ### Delete a value (user added only):
 
 ```diff
-+ **DELETE**    /:id
++ **DELETE**    /values/:id
 ```
 
 Response:
@@ -470,7 +493,7 @@ Response:
 ### Delete a user's chosen value:
 
 ```diff
-+ **DELETE**    /user/:user_id/:user_value_id
++ **DELETE**    /values/user/:user_id/:user_value_id
 ```
 
 Response:
@@ -486,10 +509,10 @@ Response:
 ]
 ```
 
-### Delete a user's top value
+### Delete a user's top value:
 
 ```diff
-+ **DELETE**    /user/:user_id/top-values/:top_id
++ **DELETE**    /values/user/:user_id/top-values/:top_id
 ```
 
 Response:
@@ -515,4 +538,183 @@ _Header must include token_
 
 ---
 
-## Get something
+### Get a prompt by Id:
+
+```diff
++ **GET**   /prompt/:id
+```
+
+Response:
+
+```javascript
+{
+    "id": prompt_id,
+    "user_id": user_id,
+    "description": "Prompt Text"
+}
+```
+
+### Add a prompt:
+
+```diff
++ **POST**  /prompt/
+```
+
+Request Body:
+
+```javascript
+{
+    "user_id": (number),
+    "description": (string)
+}
+```
+
+Response:
+
+```javascript
+{
+    "id": prompt_id,
+    "user_id": user_id,
+    "description": "Prompt Text"
+}
+```
+
+### Update a prompt:
+
+```diff
++ **PUT**   /prompt/:id
+```
+
+Request Body:
+
+```javascript
+{
+    "id": (number),
+    "user_id": (number),
+    "description": (string)
+}
+```
+
+Response: 
+
+```javascript
+{
+    "id": prompt_id,
+    "user_id": user_id,
+    "description": "Prompt Text"
+}
+```
+
+### Delete a prompt:
+
+```diff
++ **DELETE**    /prompt/:id
+```
+
+Response:
+
+```javascript
+{
+    "id": prompt_id,
+    "user_id": user_id,
+    "description": "Prompt Text"
+}
+```
+
+---
+---
+
+## Projects
+
+_Header must include token_
+
+---
+
+### Get a project by id:
+
+```diff
++ **GET**   /projects/:id
+```
+
+Response:
+
+```javascript
+{
+    "id": project_id,
+    "user_id": user_id,
+    "project": "Project Name",
+    "description": "Project Description"
+}
+```
+
+### Add a project:
+
+```diff
++ **POST**  /projects/
+```
+
+Request Body:
+
+```javascript
+{
+    "user_id": (number),
+    "project": (string),
+    "description": (string)
+}
+```
+
+Response:
+
+```javascript
+{
+    "id": project_id,
+    "user_id": user_id,
+    "project": "Project Name",
+    "description": "Project Description"
+}
+```
+
+### Update a project:
+
+```diff
++ **PUT**   /projects/:id
+```
+
+Request Body:
+
+```javascript
+{
+    "id": (number),
+    "user_id": (number),
+    "project": (string),
+    "description": (string)
+}
+```
+
+Response:
+
+```javascript
+{
+    "id": project_id,
+    "user_id": user_id,
+    "project": "Project Name",
+    "description": "Project Description"
+}
+```
+
+### Delete a project:
+
+```diff
++ **DELETE**    /projects/:id
+```
+
+Response:
+
+```javascript
+{
+    "id": project_id,
+    "user_id": user_id,
+    "project": "Project Name",
+    "description": "Project Description"
+}
+```

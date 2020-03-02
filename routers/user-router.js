@@ -105,10 +105,9 @@ router.post('/:id/user-info', findUser, (req, res) => {
 // ✅ update user login information
 router.put('/:id/user', findUser, (req, res) => {
     let userChange = req.body;
-    let password = userChange.password;
-
-    const hash = bcrypt.hashSync(password, 10);
-    password = hash;
+    
+    const hash = bcrypt.hashSync(userChange.password, 10);
+    userChange.password = hash;
 
 
     Users.update(req.user.id, userChange)

@@ -10,17 +10,27 @@ const router = express.Router();
 router.post('/register', (req, res) => {
     let user = req.body;
 
-    const hash = bcrypt.hashSync(user.password, 10);
-    user.password = hash;
+    if (user.password.length > 5 && user.password.length < 14) {
+        const hash = bcrypt.hashSync(user.password, 10);
+        user.password = hash;
 
-    Users.add(user)
-        .then(saved => {
-            const token = generateToken(saved);
-            res.status(201).json({ saved, token });
-        })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to register user',name, code, message, stack });
-        });
+        if (user.username.length > 5 && user.username.length < 14) {
+            Users.add(user)
+            .then(saved => {
+                const token = generateToken(saved);
+                res.status(201).json({ saved, token });
+            })
+            .catch(({ name, code, message, stack }) => {
+                res.status(500).json({ error: 'Failed to register user',name, code, message, stack });
+            });
+        } else {
+            res.status(401).json({ message: 'Username must be between 6 and 13 characters' })
+        } 
+    } else {
+        res.status(401).json({ message: 'Password must be between 6 and 13 characters' });
+    }
+
+       
 });
 
 // ✅ login a user

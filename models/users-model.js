@@ -5,7 +5,7 @@ module.exports = {
     findBy,
     findById,
     findUser,
-    // findTotalUser,
+
     add,
     addInfo,
     update,
@@ -30,6 +30,7 @@ function findById(id) {
 function findUser(id) {
     return db('user_info')
         .where('user_id', id)
+        .first();
 }
 
 function add(user) {

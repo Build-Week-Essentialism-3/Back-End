@@ -107,7 +107,7 @@ async function remove(id) {
         .where({ id })
         .del();
 
-        return removed;
+        return removed[0];
     } else {
         return { message: 'Cannot remove this Value' };
     }   
