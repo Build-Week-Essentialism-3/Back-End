@@ -1,6 +1,6 @@
 # API
 
-Base URL: **To be added when live** localhost:5500/api
+Base URL: https://essentialism3.herokuapp.com
 
 ### **Navigation:**
 
@@ -21,7 +21,7 @@ Base URL: **To be added when live** localhost:5500/api
 ### Registration:
 
 ```diff
-+ **POST**  /auth/register
++ **POST**  /api/auth/register
 ```
 
 Request Body:
@@ -49,7 +49,7 @@ Response:
 ### Login:
 
 ```diff
-+ **POST**  /auth/login
++ **POST**  /api/auth/login
 ```
 
 Request Body:
@@ -95,7 +95,7 @@ _Header must include token_
 ### Get user's login information:
 
 ```diff
-+ **GET**   /users/:id/user
++ **GET**   /api/users/:id/user
 ```
 
 Response:
@@ -111,7 +111,7 @@ Response:
 ### Get user's profile information:
 
 ```diff
-+ **GET**   /users/:id/user-info
++ **GET**   /api/users/:id/user-info
 ```
 
 Response:
@@ -127,7 +127,7 @@ Response:
 ### Add user's profile information:
 
 ```diff
-+ **POST**  /users/:id/user-info
++ **POST**  /api/users/:id/user-info
 ```
 
 Request Body:
@@ -153,7 +153,7 @@ Response:
 ### Update user's login information:
 
 ```diff
-+ **PUT**   /users/:id/user
++ **PUT**   /api/users/:id/user
 ```
 
 Request Body:
@@ -179,7 +179,7 @@ Response:
 ### Update user's profile information:
 
 ```diff
-+ **PUT**   /users/:id/user-info
++ **PUT**   /api/users/:id/user-info
 ```
 
 Request Body:
@@ -205,7 +205,7 @@ Response:
 ### Delete user's credentials:
 
 ```diff
-+ **DELETE**    /users/:id
++ **DELETE**    /api/users/:id
 ```
 
 Response:
@@ -221,7 +221,7 @@ Response:
 ### Get user's chosen values:
 
 ```diff
-+ **GET**   /users/:id/values
++ **GET**   /api/users/:id/values
 ```
 
 Response:
@@ -247,7 +247,7 @@ Response:
 ### Get one of user's chosen values:
 
 ```diff
-+ **GET**   /users/:id/values/:user_value_id
++ **GET**   /api/users/:id/values/:user_value_id
 ```
 
 Response:
@@ -266,7 +266,7 @@ Response:
 ### Get user's top values:
 
 ```diff
-+ **GET**   /users/:id/top-values
++ **GET**   /api/users/:id/top-values
 ```
 
 Response:
@@ -294,7 +294,7 @@ Response:
 ### Get user's prompt(s):
 
 ```diff
-+ **GET**   /users/:id/prompt
++ **GET**   /api/users/:id/prompt
 ```
 
 Response:
@@ -312,7 +312,7 @@ Response:
 ### Get user's projects:
 
 ```diff
-+ **GET**   /users/:id/projects
++ **GET**   /api/users/:id/projects
 ```
 
 Response:
@@ -347,7 +347,7 @@ _Header must include token_
 ### Get all values:
 
 ```diff
-+ **GET**   /values/
++ **GET**   /api/values/
 ```
 
 Response:
@@ -369,7 +369,7 @@ Response:
 ### Get a value by value id:
 
 ```diff
-+ **GET**   /values/:id
++ **GET**   /api/values/:id
 ```
 
 ```javascript
@@ -382,7 +382,7 @@ Response:
 ### Add a new value:
 
 ```diff
-+ **POST**  /values/
++ **POST**  /api/values/
 ```
 
 Request Body:
@@ -405,7 +405,7 @@ Response:
 ### Add a user value:
 
 ```diff
-+ **POST**  /values/user/:user_id
++ **POST**  /api/values/user/:user_id
 ```
 
 Request Body:
@@ -429,7 +429,7 @@ Response:
 ### Add a user top value (max: 3):
 
 ```diff
-+ **POST**  /values/user/:user_id/top-values
++ **POST**  /api/values/user/:user_id/top-values
 ```
 
 Request Body:
@@ -454,7 +454,7 @@ Response:
 ### Update a value (user added only):
 
 ```diff
-+ **PUT**   /values/:id
++ **PUT**   /api/values/:id
 ```
 
 Request Body:
@@ -478,7 +478,7 @@ Response:
 ### Delete a value (user added only):
 
 ```diff
-+ **DELETE**    /values/:id
++ **DELETE**    /api/values/:id
 ```
 
 Response:
@@ -493,7 +493,7 @@ Response:
 ### Delete a user's chosen value:
 
 ```diff
-+ **DELETE**    /values/user/:user_id/:user_value_id
++ **DELETE**    /api/values/user/:user_id/:user_value_id
 ```
 
 Response:
@@ -512,7 +512,7 @@ Response:
 ### Delete a user's top value:
 
 ```diff
-+ **DELETE**    /values/user/:user_id/top-values/:top_id
++ **DELETE**    /api/values/user/:user_id/top-values/:top_id
 ```
 
 Response:
@@ -541,7 +541,7 @@ _Header must include token_
 ### Get a prompt by Id:
 
 ```diff
-+ **GET**   /prompt/:id
++ **GET**   /api/prompt/:id
 ```
 
 Response:
@@ -557,7 +557,7 @@ Response:
 ### Add a prompt:
 
 ```diff
-+ **POST**  /prompt/
++ **POST**  /api/prompt/
 ```
 
 Request Body:
@@ -582,7 +582,7 @@ Response:
 ### Update a prompt:
 
 ```diff
-+ **PUT**   /prompt/:id
++ **PUT**   /api/prompt/:id
 ```
 
 Request Body:
@@ -608,7 +608,7 @@ Response:
 ### Delete a prompt:
 
 ```diff
-+ **DELETE**    /prompt/:id
++ **DELETE**    /api/prompt/:id
 ```
 
 Response:
@@ -633,7 +633,7 @@ _Header must include token_
 ### Get a project by id:
 
 ```diff
-+ **GET**   /projects/:id
++ **GET**   /api/projects/:id
 ```
 
 Response:
@@ -650,7 +650,7 @@ Response:
 ### Add a project:
 
 ```diff
-+ **POST**  /projects/
++ **POST**  /api/projects/
 ```
 
 Request Body:
@@ -677,7 +677,7 @@ Response:
 ### Update a project:
 
 ```diff
-+ **PUT**   /projects/:id
++ **PUT**   /api/projects/:id
 ```
 
 Request Body:
@@ -705,7 +705,7 @@ Response:
 ### Delete a project:
 
 ```diff
-+ **DELETE**    /projects/:id
++ **DELETE**    /api/projects/:id
 ```
 
 Response:
