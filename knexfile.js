@@ -45,7 +45,7 @@ module.exports = {
   },
 
   production: {
-    client: 'sqlite3',
+    client: 'pg',
     connection: process.env.DATABASE_URL,
     pool: {
       min: 2,
@@ -56,7 +56,6 @@ module.exports = {
       directory: './database/migrations'
     },
     seeds: {
-      tableName: 'knex_seeds',
       directory: './database/seeds'
     }
   }
