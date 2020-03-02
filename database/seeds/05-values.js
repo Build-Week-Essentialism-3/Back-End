@@ -60,6 +60,14 @@ exports.seed = function(knex) {
           id: 14, 
           name: 'Success in my career'
         },
+        {
+          id: 15, 
+          name: 'Testing Seeds'
+        },
+        {
+          id: 16, 
+          name: 'More testing seeds'
+        },
       ]);
     });
 };
