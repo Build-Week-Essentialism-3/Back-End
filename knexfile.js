@@ -46,13 +46,10 @@ module.exports = {
 
   production: {
     client: 'sqlite3',
-    connection: {
-      filename: process.env.DATABASE_URL
-    },
+    connection: process.env.DATABASE_URL,
     pool: {
-      afterCreate: (conn, done) => {
-        conn.run('PRAGMA foreign_keys = ON', done);
-      }
+      min: 2,
+      max: 10
     },
     migrations: {
       tableName: 'knex_migrations',
