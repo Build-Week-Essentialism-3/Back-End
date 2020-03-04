@@ -18,11 +18,10 @@ describe('value-router', function() {
     describe('values', function() {
         it('should add a new value', function() {
             return request(server)
-                .post('/api/values')
+                .get('/api/values')
                 .set('Authorization', token)
-                .send({ "name": "Enjoy everything" })
                 .then(res => {
-                    expect(res.body).toEqual('');
+                    expect(typeof res.body).toBe('object');
                 })
         })
     })
