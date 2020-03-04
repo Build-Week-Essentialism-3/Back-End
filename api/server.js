@@ -13,8 +13,8 @@ const restricted = require('../middleware/restricted.js');
 
 const server = express();
 
-server.use(express.json());
 server.use(cors());
+server.use(express.json());
 server.use(helmet());
 
 server.use('/api/auth', authRouter);
