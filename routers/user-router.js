@@ -51,6 +51,9 @@ router.get('/:id/values/:user_value_id', findUser, (req, res) => {
         .then(value => {
             res.status(200).json(value);
         })
+        .catch(({ name, code, message, stack }) => {
+            res.status(500).json({ error: 'Failed to retrieve specific User Value', name, code, message, stack });
+        });
 });
 
 // ✅ get user top values

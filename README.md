@@ -35,6 +35,8 @@ Request Body:
 
 Response:
 
+Authentication Token lasts 1 hour.
+
 ```javascript
 {
     "saved": {
@@ -44,6 +46,14 @@ Response:
     },
     "token": "authentication token"
 }
+```
+
+Errors:
+
+```diff
+- **500**   Failed to register user
+
+- **401**   Username and Password must be between 6 and 13 characters
 ```
 
 ### Login:
@@ -63,6 +73,8 @@ Request Body:
 
 Response:
 
+Authentication Token lasts 1 hour.
+
 ```javascript
 {
     "user": {
@@ -74,8 +86,26 @@ Response:
 }
 ```
 
+Errors:
+
+```diff 
+- **401**   Invalid Credentials Provided
+
+- **500**   Failed to login user
+```
+
 ---
 --- 
+
+## Protected Routes
+
+Errors:
+
+```diff 
+- **401**   Invalid Credentials Provided
+
+- **400**   Credentials required to access this content     (Not Logged In)
+```
 
 ## Users
 
@@ -108,6 +138,14 @@ Response:
 }
 ```
 
+Errors:
+
+```diff 
+- **500**   Failed to retrieve User Account Information
+
+- **404**   Cannot find User
+```
+
 ### Get user's profile information:
 
 ```diff
@@ -122,6 +160,14 @@ Response:
     "name": "Users Name",
     "nickname": "Users Nickname"
 }
+```
+
+Errors:
+
+```diff 
+- **500**   Failed to retrieve User Information
+
+- **404**   Cannot find User
 ```
 
 ### Add user's profile information:
@@ -150,6 +196,14 @@ Response:
 }
 ```
 
+Errors:
+
+```diff 
+- **500**   Failed to add User Information
+
+- **404**   Cannot find User
+```
+
 ### Update user's login information:
 
 ```diff
@@ -174,6 +228,14 @@ Response:
     "username": "users username",
     "password": "secured password"
 }
+```
+
+Errors:
+
+```diff 
+- **500**   Failed to update User
+
+- **404**   Cannot find User
 ```
 
 ### Update user's profile information:
@@ -202,6 +264,14 @@ Response:
 }
 ```
 
+Errors:
+
+```diff 
+- **500**   Failed to update User Information
+
+- **404**   Cannot find User
+```
+
 ### Delete user's credentials:
 
 ```diff
@@ -216,6 +286,14 @@ Response:
     "username": "users username",
     "password": "secured password"
 }
+```
+
+Errors:
+
+```diff 
+- **500**   Failed to remove User
+
+- **404**   Cannot find User
 ```
 
 ### Get user's chosen values:
@@ -244,6 +322,14 @@ Response:
 ]
 ```
 
+Errors:
+
+```diff 
+- **500**   Failed to retrieve User Values
+
+- **404**   Cannot find User
+```
+
 ### Get one of user's chosen values:
 
 ```diff
@@ -261,6 +347,14 @@ Response:
         "name": "Value Name"
     }
 ]
+```
+
+Errors: 
+
+```diff 
+- **500**   Failed to retrieve specific User Value
+
+- **404**   Cannot find User
 ```
 
 ### Get user's top values:
@@ -291,6 +385,14 @@ Response:
 ]
 ```
 
+Errors: 
+
+```diff 
+- **500**   Failed to retrieve User Top Values
+
+- **404**   Cannot find User
+```
+
 ### Get user's prompt(s):
 
 ```diff
@@ -307,6 +409,14 @@ Response:
         "description": "Prompt Text"
     }
 ]
+```
+
+Errors: 
+
+```diff 
+- **500**   Failed to retrieve User Prompt(s)
+
+- **404**   Cannot find User
 ```
 
 ### Get user's projects:
@@ -333,6 +443,14 @@ Response:
     },
     ...
 ]
+```
+
+Errors: 
+
+```diff 
+- **500**   Failed to retrieve User Projects
+
+- **404**   Cannot find User
 ```
 
 ---
@@ -366,6 +484,12 @@ Response:
 ]
 ```
 
+Errors: 
+
+```diff 
+- **500**   Failed to retrieve Values
+```
+
 ### Get a value by value id:
 
 ```diff
@@ -377,6 +501,14 @@ Response:
     "id": id,
     "name": "Value name"
 }
+```
+
+Errors: 
+
+```diff 
+- **500**   Failed to retrieve Value
+
+- **404**   Cannot find Value
 ```
 
 ### Add a new value:
@@ -400,6 +532,12 @@ Response:
     "id": value_id,
     "name": "Value Name"
 }
+```
+
+Errors: 
+
+```diff 
+- **500**   Failed to add Value
 ```
 
 ### Add a user value:
@@ -426,6 +564,14 @@ Response:
 }
 ```
 
+Errors: 
+
+```diff 
+- **500**   Failed to add User Value
+
+- **404**   Cannot find User
+```
+
 ### Add a user top value (max: 3):
 
 ```diff
@@ -449,6 +595,13 @@ Response:
     "id": value_id,
     "name": "Value Name"
 }
+```
+Errors:
+
+```diff 
+- **500**   Failed to add Top Value
+
+- **404**   Cannot find User
 ```
 
 ### Update a value (user added only):
@@ -475,6 +628,14 @@ Response:
 }
 ```
 
+Errors:
+
+```diff 
+- **500**   Failed to update Value
+
+- **404**   Cannot find Value
+```
+
 ### Delete a value (user added only):
 
 ```diff
@@ -488,6 +649,14 @@ Response:
     "id": value_id,
     "name": "Value Name"
 }
+```
+
+Errors:
+
+```diff 
+- **500**   Failed to remove Value
+
+- **404**   Cannot find Value
 ```
 
 ### Delete a user's chosen value:
@@ -509,6 +678,14 @@ Response:
 ]
 ```
 
+Errors:
+
+```diff 
+- **500**   Failed to remove User Value
+
+- **404**   Cannot find User
+```
+
 ### Delete a user's top value:
 
 ```diff
@@ -527,6 +704,14 @@ Response:
         "name": "Value Name"
     }
 ]
+```
+
+Errors:
+
+```diff 
+- **500**   Failed to remove Top Value
+
+- **404**   Cannot find User
 ```
 
 ---
@@ -554,6 +739,14 @@ Response:
 }
 ```
 
+Errors:
+
+```diff 
+- **500**   Failed to retrieve Prompt
+
+- **404**   Cannot find the Prompt
+```
+
 ### Add a prompt:
 
 ```diff
@@ -579,6 +772,12 @@ Response:
 }
 ```
 
+Errors:
+
+```diff 
+- **500**   Failed to add Prompt
+```
+
 ### Update a prompt:
 
 ```diff
@@ -593,6 +792,14 @@ Request Body:
     "user_id": (number),
     "description": (string)
 }
+```
+
+Errors:
+
+```diff 
+- **500**   Failed to update Prompt
+
+- **404**   Cannot find the Prompt
 ```
 
 Response: 
@@ -621,6 +828,14 @@ Response:
 }
 ```
 
+Errors:
+
+```diff 
+- **500**   Failed to delete Prompt
+
+- **404**   Cannot find the Prompt
+```
+
 ---
 ---
 
@@ -645,6 +860,14 @@ Response:
     "project": "Project Name",
     "description": "Project Description"
 }
+```
+
+Errors:
+
+```diff 
+- **500**   Failed to retrieve Project
+
+- **404**   Cannot find the Project
 ```
 
 ### Add a project:
@@ -672,6 +895,12 @@ Response:
     "project": "Project Name",
     "description": "Project Description"
 }
+```
+
+Errors:
+
+```diff 
+- **500**   Failed to add Project
 ```
 
 ### Update a project:
@@ -702,6 +931,14 @@ Response:
 }
 ```
 
+Errors:
+
+```diff 
+- **500**   Failed to update Project
+
+- **404**   Cannot find the Project
+```
+
 ### Delete a project:
 
 ```diff
@@ -717,4 +954,12 @@ Response:
     "project": "Project Name",
     "description": "Project Description"
 }
+```
+
+Errors:
+
+```diff 
+- **500**   Failed to delete Project
+
+- **404**   Cannot find the Project
 ```
