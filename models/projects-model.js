@@ -17,7 +17,8 @@ function find() {
 };
 
 function findBy(filter) {
-    return db('user_projects').where(filter);
+    return db('user_projects')
+        .where(filter);
 };
 
 function findById(id) {
@@ -33,7 +34,8 @@ function findByUser(user_id) {
 
 async function add(project) {
     // expects project = {user_id, project, description}
-    const [id] = await db('user_projects').insert(project);
+    const [id] = await db('user_projects')
+        .insert(project);
 
     return findById(id);
 };

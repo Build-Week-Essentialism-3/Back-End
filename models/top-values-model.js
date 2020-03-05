@@ -10,7 +10,8 @@ module.exports = {
 }
 
 async function add(value) {
-    const [id] = await db('top_values').insert(value);
+    const [id] = await db('top_values')
+        .insert(value);
 
     return findById(id);        
 };

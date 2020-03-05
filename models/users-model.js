@@ -5,7 +5,6 @@ module.exports = {
     findBy,
     findById,
     findUser,
-
     add,
     addInfo,
     update,
@@ -18,7 +17,8 @@ function find() {
 };
 
 function findBy(filter) {
-    return db('users').where(filter);
+    return db('users')
+        .where(filter);
 };
 
 function findById(id) {
@@ -31,7 +31,7 @@ function findUser(id) {
     return db('user_info')
         .where('user_id', id)
         .first();
-}
+};
 
 function add(user) {
     // expects user = {username, password} where password is a hash
@@ -39,16 +39,18 @@ function add(user) {
         .insert(user, 'id')
         .then(ids => {
             const [id] = ids;
+
             return findById(id);
         });
 };
 
 async function addInfo(info) {
     // expects info = {user_id, name, nickname}
-    const [user_id] = await db('user_info').insert(info);
+    const [user_id] = await db('user_info')
+        .insert(info);
 
     return findUser(user_id);
-}
+};
 
 async function update(id, changes) {
     // expects id = id of user
@@ -68,7 +70,7 @@ async function updateInfo(id, changes) {
         .update(changes);
 
     return findUser(id);
-}
+};
 
 async function remove(id) {
     const removed = await findById(id);

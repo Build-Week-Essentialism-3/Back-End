@@ -26,7 +26,8 @@ function find() {
 };
 
 function findBy(filter) {
-    return db('values').where(filter);
+    return db('values')
+        .where(filter);
 }
 
 function findById(id) {
@@ -47,7 +48,7 @@ function findSpecific(id) {
         .where('UV.id', id)
         .join('values as V', 'UV.value_id', 'V.id')
         .select('UV.id', 'UV.user_id', 'UV.value_id', 'V.name');
-}
+};
 
 function findTop(user_id) {
     return db('top_values as TV')
@@ -61,28 +62,31 @@ function findTopById(top_id) {
         .where('TV.id', top_id)
         .join('values as V', 'TV.value_id', 'V.id')
         .select('TV.id', 'TV.user_id', 'TV.value_id', 'TV.priority', 'V.name');
-}
+};
 
 async function add(value) {
     // expects value = {name}
-    const [id] = await db('values').insert(value);
+    const [id] = await db('values')
+        .insert(value);
 
     return findById(id);
 };
 
 async function addUser(value) {
     // expects value = {user_id, value_id}
-    await db('user_values').insert(value);
+    await db('user_values')
+        .insert(value);
 
     return findById(value.value_id);
-}
+};
 
 async function addTop(value) {
     // expects value = {user_id, value_id, priority}
-    await db('top_values').insert(value);
+    await db('top_values')
+        .insert(value);
 
     return findById(value.value_id);
-}
+};
 
 async function update(id, changes) {
     // expects id = id of value
@@ -95,8 +99,7 @@ async function update(id, changes) {
         return findById(id);
     } else {
         return { message: 'Cannot update this Value' };
-    }
-    
+    };    
 };
 
 async function remove(id) {
@@ -110,7 +113,7 @@ async function remove(id) {
         return removed[0];
     } else {
         return { message: 'Cannot remove this Value' };
-    }   
+    };
 };
 
 async function removeUser(id) {
@@ -123,7 +126,7 @@ async function removeUser(id) {
     return removedValue;
 };
 
-async function removeTop(user_id, id) {
+async function removeTop(id) {
     const removedTop = await findTopById(id);
 
     await db('top_values')
@@ -131,4 +134,4 @@ async function removeTop(user_id, id) {
         .del();
 
     return removedTop;
-} 
+};

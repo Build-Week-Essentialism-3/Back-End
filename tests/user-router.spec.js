@@ -47,8 +47,8 @@ describe('user-router', function() {
                         "user_id": 1,
                         "name": "Testing",
                         "nickname": "User"
-                    })
-                })
-        })
-    })
-})
+                    });
+                });
+        });
+    });
+});

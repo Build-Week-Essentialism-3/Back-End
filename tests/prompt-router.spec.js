@@ -34,8 +34,7 @@ describe('prompt-router', function() {
                 })
                 .then(res => {
                     expect(typeof res.body).toMatch('object');
-                })
-        })
-
-    })
-})
+                });
+        });
+    });
+});

@@ -13,8 +13,8 @@ router.get('/', (req, res) => {
         .then(values => {
             res.status(200).json(values);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to retrieve Values', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to retrieve Values', error: err });
         });
 });
 
@@ -24,8 +24,8 @@ router.get('/:id', findValue, (req, res) => {
         .then(value => {
             res.status(200).json(value);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to retrieve Value', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to retrieve Value', error: err });
         });
 });
 
@@ -38,8 +38,8 @@ router.post('/', (req, res) => {
         .then(added => {
             res.status(200).json(added);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to add Value', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to add Value', error: err });
         });
 });
 
@@ -51,8 +51,8 @@ router.post('/user/:user_id', findUser, (req, res) => {
         .then(added => {
             res.status(200).json(added);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to add User Value', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to add User Value', error: err });
         });
 });
 
@@ -62,19 +62,18 @@ router.post('/user/:user_id/top-values', findUser, (req, res) => {
 
     Values.findTop(req.user.id)
         .then(values => {
-            console.log(values.length);
             if (values.length <= 3) {
                 Values.addTop(addValue)
                     .then(added => {
                         res.status(200).json(added);
                     })
-                    .catch(({ name, code, message, stack }) => {
-                        res.status(500).json({ error: 'Failed to add Top Value', name, code, message, stack });
+                    .catch(err => {
+                        res.status(500).json({ message: 'Failed to add Top Value', error: err });
                     });
             } else {
-                res.json({ message: 'Only 3 Top Values allowed' })
-            }
-        })
+                res.json({ message: 'Only 3 Top Values allowed' });
+            };
+        });
 });
 
 // UPDATE INFORMATION
@@ -86,8 +85,8 @@ router.put('/:id', findValue, (req, res) => {
         .then(updatedValue => {
             res.status(200).json(updatedValue);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to update Value', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to update Value', error: err });
         });
 });
 
@@ -98,8 +97,8 @@ router.delete('/:id', findValue, (req, res) => {
         .then(removed => {
             res.status(200).json(removed);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to remove Value', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to remove Value', error: err });
         });
 });
 
@@ -111,8 +110,8 @@ router.delete('/user/:user_id/:user_value_id', findUser, (req, res) => {
         .then(removed => {
             res.status(200).json(removed);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to remove User Value', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to remove User Value', error: err });
         });
 });
 
@@ -120,12 +119,12 @@ router.delete('/user/:user_id/:user_value_id', findUser, (req, res) => {
 router.delete('/user/:user_id/top-values/:top_id', findUser, (req, res) => {
     const { top_id } = req.params;
 
-    Values.removeTop(req.user.id, top_id)
+    Values.removeTop(top_id)
         .then(removed => {
             res.status(200).json(removed);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to remove Top Value', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to remove Top Value', error: err });
         });
 });
 

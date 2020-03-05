@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
                 req.project = project;
                 next();
             } else {
-                res.status(404).json({ message: 'Cannot find the project' })
-            }
-        })
-}
+                res.status(404).json({ message: 'Cannot find the project' });
+            };
+        });
+};

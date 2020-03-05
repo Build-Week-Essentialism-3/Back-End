@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
+
 const generateToken = require('../middleware/generate-token.js');
 
 const Users = require('../models/users-model.js');
@@ -16,21 +17,20 @@ router.post('/register', (req, res) => {
 
         if (user.username.length > 5 && user.username.length < 14) {
             Users.add(user)
-            .then(saved => {
-                const token = generateToken(saved);
-                res.status(201).json({ saved, token });
-            })
-            .catch(({ name, code, message, stack }) => {
-                res.status(500).json({ error: 'Failed to register user',name, code, message, stack });
-            });
+                .then(saved => {
+                    const token = generateToken(saved);
+
+                    res.status(201).json({ saved, token });
+                })
+                .catch(err => {
+                    res.status(500).json({ message: 'Failed to register user', error: err });
+                });
         } else {
-            res.status(401).json({ message: 'Username must be between 6 and 13 characters' })
-        } 
+            res.status(401).json({ message: 'Username must be between 6 and 13 characters' });
+        };
     } else {
         res.status(401).json({ message: 'Password must be between 6 and 13 characters' });
-    }
-
-       
+    };       
 });
 
 // ✅ login a user
@@ -43,13 +43,13 @@ router.post('/login', (req, res) => {
             if (user && bcrypt.compareSync(password, user.password)) {
                 const token = generateToken(user);
 
-                res.status(200).json({user, token});
+                res.status(200).json({ user, token });
             } else {
                 res.status(401).json({ message: 'Invalid Credentials Provided' });
             };
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to login user',name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to login user', error: err });
         });
 });
 

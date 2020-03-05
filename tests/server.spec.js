@@ -11,8 +11,9 @@ describe('server', function() {
 
     describe('GET /', function() {
         it('should return "Essentialism 3" as the value', function() {
-            return request(server).get('/').then(res => {
-                expect(res.body.project).toBe('Essentialism 3');
+            return request(server).get('/')
+                .then(res => {
+                    expect(res.body.project).toBe('Essentialism 3');
             });
         });
     });

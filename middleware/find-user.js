@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
                 req.user = user;
                 next();
             } else {
-                res.status(404).json({ message: 'Cannot find User' })
-            }
-        })
-}
+                res.status(404).json({ message: 'Cannot find User' });
+            };
+        });
+};
