@@ -16,8 +16,8 @@ router.get('/:id/user', findUser, (req, res) => {
         .then(user => {
             res.status(200).json(user);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to retrieve User Account Information', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to retrieve User Account Information', error: err });
         });
 });
 
@@ -27,8 +27,8 @@ router.get('/:id/user-info', findUser, (req, res) => {
         .then(user => {
             res.status(200).json(user);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to retrieve User Information', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to retrieve User Information', error: err });
         });
 });
 
@@ -38,21 +38,21 @@ router.get('/:id/values', findUser, (req, res) => {
         .then(values => {
             res.status(200).json(values);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to retrieve User Values', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to retrieve User Values', error: err });
         });
 });
 
 // ✅ get one user value
 router.get('/:id/values/:user_value_id', findUser, (req, res) => {
-    const { user_value_id } = req.params
+    const { user_value_id } = req.params;
 
     Values.findSpecific(user_value_id)
         .then(value => {
             res.status(200).json(value);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to retrieve specific User Value', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to retrieve specific User Value', error: err });
         });
 });
 
@@ -62,8 +62,8 @@ router.get('/:id/top-values', findUser, (req, res) => {
         .then(values => {
             res.status(200).json(values);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to retrieve User Top Values', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to retrieve User Top Values', error: err });
         });
 });
 
@@ -73,8 +73,8 @@ router.get('/:id/prompt', findUser, (req, res) => {
         .then(prompt => {
             res.status(200).json(prompt);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to retrieve User Prompt(s)', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to retrieve User Prompt(s)', error: err });
         });
 });
 
@@ -84,11 +84,10 @@ router.get('/:id/projects', findUser, (req, res) => {
         .then(projects => {
             res.status(200).json(projects);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to retrieve User Projects', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to retrieve User Projects', error: err });
         });
 });
-
 
 // ADD INFORMATION
 // ✅ add user information
@@ -99,8 +98,8 @@ router.post('/:id/user-info', findUser, (req, res) => {
         .then(addedInfo => {
             res.status(200).json(addedInfo);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to add User Information', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to add User Information', error: err });
         });
 });
 
@@ -112,13 +111,12 @@ router.put('/:id/user', findUser, (req, res) => {
     const hash = bcrypt.hashSync(userChange.password, 10);
     userChange.password = hash;
 
-
     Users.update(req.user.id, userChange)
         .then(updatedUser => {
             res.status(200).json(updatedUser);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to update User', name, code, message, stack });
+        .catch(er => {
+            res.status(500).json({ message: 'Failed to update User', error: err });
         });
 });
 
@@ -130,8 +128,8 @@ router.put('/:id/user-info', findUser, (req, res) => {
         .then(updatedInfo => {
             res.status(200).json(updatedInfo);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to update User Information', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to update User Information', error: err });
         });
 });
 
@@ -142,10 +140,9 @@ router.delete('/:id', findUser, (req, res) => {
         .then(removed => {
             res.status(200).json(removed);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to remove User', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to remove User', error: err });
         });
 });
-
 
 module.exports = router

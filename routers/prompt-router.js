@@ -5,17 +5,15 @@ const findPrompt = require('../middleware/find-prompt.js');
 
 const Prompt = require('../models/prompt-model.js');
 
-
 // GET INFORMATION
-
 // ✅ get prompt by id
 router.get('/:id', findPrompt, (req, res) => {
     Prompt.findById(req.prompt.id)
         .then(prompt => {
             res.status(200).json(prompt);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to retrieve Prompt', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to retrieve Prompt', error: err });
         });
 });
 
@@ -28,8 +26,8 @@ router.post('/', (req, res) => {
         .then(added => {
             res.status(201).json(added);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to add Prompt', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to add Prompt', error: err });
         });
 });
 
@@ -42,8 +40,8 @@ router.put('/:id', findPrompt, (req, res) => {
         .then(updatedPrompt => {
             res.status(200).json(updatedPrompt);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to update Prompt', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to update Prompt', error: err });
         });
 });
 
@@ -54,8 +52,8 @@ router.delete('/:id', findPrompt, (req, res) => {
         .then(removed => {
             res.status(200).json(removed);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to delete Prompt', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to delete Prompt', error: err });
         });
 });
 

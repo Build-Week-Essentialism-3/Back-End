@@ -22,7 +22,7 @@ describe('value-router', function() {
                 .set('Authorization', token)
                 .then(res => {
                     expect(typeof res.body).toBe('object');
-                })
-        })
-    })
-})
+                });
+        });
+    });
+});

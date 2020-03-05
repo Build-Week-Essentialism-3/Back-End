@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
                 req.value = value;
                 next();
             } else {
-                res.status(404).json({ message: 'Cannot find value' })
-            }
-        })
-}
+                res.status(404).json({ message: 'Cannot find value' });
+            };
+        });
+};

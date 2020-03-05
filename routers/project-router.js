@@ -3,7 +3,6 @@ const router = require('express').Router();
 
 const findProject = require('../middleware/find-project.js');
 
-
 const Projects = require('../models/projects-model.js');
 
 // GET INFORMATION
@@ -13,8 +12,8 @@ router.get('/:id', findProject, (req, res) => {
         .then(project=> {
             res.status(200).json(project);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to retrieve Project', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to retrieve Project', error: err });
         });
 });
 
@@ -27,8 +26,8 @@ router.post('/', (req, res) => {
         .then(added => {
             res.status(201).json(added);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to add Project', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to add Project', error: err });
         });
 });
 
@@ -41,8 +40,8 @@ router.put('/:id', findProject, (req, res) => {
         .then(updatedProject => {
             res.status(200).json(updatedProject);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to update Project', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to update Project', error: err });
         });
 });
 
@@ -53,8 +52,8 @@ router.delete('/:id', findProject, (req, res) => {
         .then(removed => {
             res.status(200).json(removed);
         })
-        .catch(({ name, code, message, stack }) => {
-            res.status(500).json({ error: 'Failed to delete Project', name, code, message, stack });
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to delete Project', error: err });
         });
 });
 

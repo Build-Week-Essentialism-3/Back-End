@@ -34,7 +34,7 @@ describe('project-router', function() {
                     expect(res.body).toHaveProperty('user_id');
                     expect(res.body).toHaveProperty('project');
                     expect(res.body).toHaveProperty('description');
-                })
-        })
+                });
+        });
     });
 });

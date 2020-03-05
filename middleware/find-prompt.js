@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
                 req.prompt = prompt;
                 next();
             } else {
-                res.status(404).json({ message: 'Cannot find the prompt' })
-            }
-        })
-}
+                res.status(404).json({ message: 'Cannot find the prompt' });
+            };
+        });
+};
