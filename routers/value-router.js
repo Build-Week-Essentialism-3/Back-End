@@ -5,6 +5,7 @@ const findValue = require('../middleware/find-value.js');
 const findUser = require('../middleware/find-user.js');
 
 const Values = require('../models/values-model.js');
+const Users = require('../models/users-model.js');
 
 // GET INFORMATION
 // ✅ get all values
@@ -46,13 +47,25 @@ router.post('/', (req, res) => {
 // ✅ add a user value
 router.post('/user/:user_id', findUser, (req, res) => {
     const addValue = req.body;
-
-    Values.addUser(addValue)
-        .then(added => {
-            res.status(200).json(added);
-        })
-        .catch(err => {
-            res.status(500).json({ message: 'Failed to add User Value', error: err });
+    let contained = [];
+    Values.findByUser(req.user.id)
+        .then(values => {
+            values.map(val => {
+                if (val.value_id === addValue.value_id) {
+                    contained.push(val);
+                }
+            })
+            if (contained.length === 0) {
+                Values.addUser(addValue)
+                .then(added => {
+                    res.status(200).json(added);
+                })
+                .catch(err => {
+                    res.status(500).json({ message: 'Failed to add User Value', error: err });
+                });
+            } else {
+                res.json({ message: 'Value already added to User Values' })
+            }; 
         });
 });
 
